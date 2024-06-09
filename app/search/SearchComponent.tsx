@@ -53,6 +53,7 @@ export default function SearchComponent({
             .entries(newParams)
             .map(([key, val]) => `${key}=${String(val).replaceAll('\n', '')}`)
             .join('&');
+        setMobileModal(false);
         router.replace(`search?${x}`, { scroll: false });
     }
     return (

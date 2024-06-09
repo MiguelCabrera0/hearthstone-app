@@ -15,7 +15,8 @@ export default function MobileModal({ children, open, close, className }: Readon
                 <div className={classNames(
                     "absolute inset-y-0 right-0 z-40",
                     "bg-[#313f63] opacity-95",
-                    "min-h-full w-full",
+                    "top-0 bottom-0 right-0 left-0",
+                    "overflow-auto",
                 )}>
                     <div className="flex justify-end mt-3 mr-3">
                         <button
@@ -26,7 +27,7 @@ export default function MobileModal({ children, open, close, className }: Readon
                             <XMarkIcon className="top-0 right-0 block h-6 w-6" aria-hidden="true" />
                         </button>
                     </div>
-                    <div className="relative">
+                    <div className="relative h-[90%]">
                         <div className={className}>
                             {children}
                         </div>
