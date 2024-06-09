@@ -1,4 +1,4 @@
-import SearchComponent from "./SearchComponent";
+import SearchComponent from "../components/SearchComponent";
 import CardComponent from "../components/CardComponent";
 import { getToken, searchCards } from "../utilities/functions";
 import Image from "next/image";
