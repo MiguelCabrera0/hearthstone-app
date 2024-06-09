@@ -38,3 +38,4 @@ export type SelectOption = {
     slug: number | string,
     image?: string,
 };
+

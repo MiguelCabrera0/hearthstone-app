@@ -12,6 +12,7 @@ export const getToken = (async () => {
         headers,
         method: 'POST',
         body,
+        next: { revalidate: 86399 },
     }).then((res) => res.json());
     return access_token;
 });
@@ -21,12 +22,13 @@ export function classNames(...classes: (string | null | undefined)[]) {
 };
 
 export async function searchCards(accessToken: string, searchParams: { [key: string]: string | string[] | undefined }) {
-    const pageSize = 10;
-    const filter = Object
-        .entries(searchParams)
-        .map(([key, val]) => `${key}=${String(val).replaceAll('\n', '')}`)
-        .join('&');
-    const apiUrl = `https://us.api.blizzard.com/hearthstone/cards?locale=en_US&${filter}&pageSize=${pageSize}`;
+    const pageSize = "10";
+    const params = new URLSearchParams();
+    params.set('pageSize', pageSize);
+    params.set('locale', "en_US");
+    Object.entries(searchParams)
+        .forEach(([key, val]) => params.set(key, String(val).replaceAll('\n', '')));
+    const apiUrl = `https://us.api.blizzard.com/hearthstone/cards?${params}`;
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${accessToken}`);
     return fetch(apiUrl, { headers })

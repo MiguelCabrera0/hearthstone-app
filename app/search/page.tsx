@@ -43,14 +43,14 @@ export default async function Search({
                 <h1 className="text-2xl ml-28 my-8">
                     Results for: "{searchParams.textFilter}"
                 </h1>
-                <div className="grid grid-cols-5 w-full mb-8">
+                {/* <div className="grid grid-cols-5 w-full mb-8">
                     {cards.map((card) => (
                         <CardComponent
                             key={card.id}
                             card={card}
                         />
                     ))}
-                </div>
+                </div> */}
             </div>
         )
         : (
