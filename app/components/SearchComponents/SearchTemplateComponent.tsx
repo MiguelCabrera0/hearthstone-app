@@ -1,112 +1,32 @@
-'use client';
-
-import { classNames, searchMultipleParam, searchSingularParam } from "../utilities/functions";
-import { cardTypes, keywords, minionTypes, rarities, sortTypes } from "../utilities/constants";
+'use client'
+import { sortTypes } from "../../utilities/constants";
 import Image from "next/image";
-import BorderGoldenBox from "./BorderGoldenBox";
+import BorderGoldenBox from "../BorderGoldenBox";
 import FilterIcon from "@/public/assets/filter icon white.svg"
-import React, { useMemo, useState } from "react";
-import SelectComponent from "./SelectComponent";
-import { useRouter } from "next/navigation";
-import MobileModal from "./MobileModal";
+import React from "react";
+import SelectComponent from "../SelectComponent";
+import MobileModal from "../MobileModal";
+import FilterComponent from "./FilterComponent";
 
-function Filters({
+export default function SearchTemplateComponent({
+    mobileModal,
+    filters,
+    close,
+    manaArray,
+    handleFilterClick,
+    setMobileModal,
     handleMultiple,
     handleSingular,
 }: Readonly<{
-    handleMultiple: (type: string, slug: string) => void,
-    handleSingular: (type: string, slug: string) => void,
+    mobileModal: boolean;
+    filters: boolean;
+    close: () => void;
+    manaArray: { slug: string; name: string; }[];
+    handleFilterClick: () => void;
+    setMobileModal: (val: boolean) => void;
+    handleMultiple: (type: string, value: string) => void;
+    handleSingular: (type: string, value: string) => void;
 }>) {
-    const attackArray = useMemo(() => new Array(21)
-        .fill(false)
-        .map((_, idx) => ({ selected: false, slug: idx, name: `Attack: ${idx}` })), []);
-    const healthArray = useMemo(() => new Array(21)
-        .fill(false)
-        .map((_, idx) => ({ selected: false, slug: idx, name: `Health: ${idx}` })), []);
-    return (
-        <>
-            <BorderGoldenBox>
-                <SelectComponent
-                    id="attack"
-                    options={attackArray}
-                    placeholder="Attack"
-                    onChange={(value) => handleMultiple('attack', String(value))}
-                />
-            </BorderGoldenBox>
-            <BorderGoldenBox>
-                <SelectComponent
-                    id="health"
-                    options={healthArray}
-                    placeholder="Health"
-                    onChange={(value) => handleMultiple('health', String(value))}
-                />
-            </BorderGoldenBox>
-            <BorderGoldenBox>
-                <SelectComponent
-                    id="card-type"
-                    placeholder="Card Type"
-                    options={cardTypes}
-                    onChange={(value) => handleSingular('type', String(value))}
-                />
-            </BorderGoldenBox>
-            <BorderGoldenBox>
-                <SelectComponent
-                    id="minion-type"
-                    placeholder="Minion Type"
-                    options={minionTypes}
-                    onChange={(value) => handleSingular('minionType', String(value))}
-                />
-            </BorderGoldenBox>
-            <BorderGoldenBox>
-                <SelectComponent
-                    id="rarity"
-                    placeholder="Rarity"
-                    options={rarities}
-                    onChange={(value) => handleSingular('rarity', String(value))}
-                />
-            </BorderGoldenBox>
-            <BorderGoldenBox>
-                <SelectComponent
-                    id="keywords"
-                    placeholder="Keywords"
-                    options={keywords}
-                    onChange={(value) => handleSingular('keyword', String(value))}
-                />
-            </BorderGoldenBox>
-        </>
-    )
-}
-
-export default function SearchComponent({
-    searchParams,
-}: Readonly<{
-    searchParams: { [key: string]: string | string[] | undefined }
-}>) {
-    const router = useRouter();
-    const [mobileModal, setMobileModal] = useState(false);
-    const [filters, setFilters] = useState(false);
-    const close = () => setMobileModal(false);
-    const manaArray = useMemo(() => {
-        const x = new Array(10).fill(null).map((_, idx) => ({ slug: String(idx), name: String(idx) }));
-        x.push({ slug: new Array(21).fill(null).map((_, idx) => idx + 10).join(), name: "10+" })
-        return x;
-    }, []);
-    const handleFilterClick = () => setFilters((prev) => !prev);
-    const closeModal = () => setMobileModal(false);
-    const handleMultiple = (type: string, value: string) => searchMultipleParam({
-        type,
-        value,
-        callback: closeModal,
-        searchParams,
-        router,
-    })
-    const handleSingular = (type: string, value: string) => searchSingularParam({
-        type,
-        value,
-        callback: closeModal,
-        searchParams,
-        router,
-    })
     return (
         <div>
             <div className="flex justify-center">
@@ -200,14 +120,14 @@ export default function SearchComponent({
                     </button>
                     {filters && (
                         <div className="flex flex-col space-y-4">
-                            <Filters handleMultiple={handleMultiple} handleSingular={handleSingular} />
+                            <FilterComponent handleMultiple={handleMultiple} handleSingular={handleSingular} />
                         </div>
                     )}
                 </MobileModal>
             </div>
             {filters && (
                 <div className="hidden md:grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-3">
-                    <Filters handleMultiple={handleMultiple} handleSingular={handleSingular} />
+                    <FilterComponent handleMultiple={handleMultiple} handleSingular={handleSingular} />
                 </div>
             )}
         </div>

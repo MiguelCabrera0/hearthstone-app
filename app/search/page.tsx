@@ -1,10 +1,10 @@
-import SearchComponent from "../components/SearchComponent";
+import SearchComponent from "../components/SearchComponents/SearchComponent";
 import CardComponent from "../components/CardComponent";
 import { getToken, searchCards } from "../utilities/functions";
 import Image from "next/image";
 import NoCards from "@/public/assets/no cards found@3x.png";
 import Link from "next/link";
-import CardNavigator from "../components/CardNavigator";
+import CardNavigator from "../components/SearchComponents/CardNavigator";
 
 export default async function Search({
     searchParams,
