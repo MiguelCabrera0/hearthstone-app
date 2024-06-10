@@ -15,7 +15,7 @@ export default async function CardView({
             className="flex items-center justify-center flex-col mt-10 md:mt-20"
         >
             <span className="text-3xl drop-shadow-md small-text-stroke md:text-5xl tracking-tighter">
-                Mana Bind
+                {card.name}
             </span>
             <Image
                 src={card.image}
