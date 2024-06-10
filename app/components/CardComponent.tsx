@@ -1,20 +1,27 @@
+'use client'
 import Image from "next/image";
 import { Card } from "../utilities/types";
+import { useRouter } from "next/navigation";
 
 export default function CardComponent({ card }:
     Readonly<{ card: Card }>
 ) {
+    const router = useRouter();
+    const onClick = () => router.push(`/card/${card.slug}`);
     return (
         <div
             key={card.id}
             className="flex items-center justify-center flex-col"
+            onClick={onClick}
         >
-            <Image
-                src={card.image}
-                alt={card.name}
-                width={154}
-                height={216}
-            />
+            <button onClick={onClick}>
+                <Image
+                    src={card.image}
+                    alt={card.name}
+                    width={154}
+                    height={216}
+                />
+            </button>
             <div className="Rectangle-5 text-black flex text-center text-xs flex-col relative">
                 <button className="Ellipse-1">
                     <svg fill="#7a5b35" version="1.1" viewBox="0 0 378.94 378.94">

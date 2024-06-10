@@ -50,6 +50,22 @@ export async function searchCards(accessToken: string, searchParams: UrlSearchPa
         });
 };
 
+export async function getCard(accessToken: string, slug: string | number): Promise<Card> {
+    const apiUrl = `https://us.api.blizzard.com/hearthstone/cards/${slug}?locale=en_US`;
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${accessToken}`);
+    return fetch(apiUrl, { headers })
+        .then(response => {
+            return response.json()
+        })
+        .then((card: Card) => ({
+            ...card,
+            cardType: cardTypes.find((item) => item.id === card.cardTypeId)?.name,
+            rarity: rarities.find((item) => item.id === card.rarityId)?.name,
+            setName: sets.find((item) => item.id === card.cardSetId)?.name,
+        }))
+};
+
 export const searchMultipleParam = ({
     type,
     value,
