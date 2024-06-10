@@ -21,18 +21,15 @@ export default function SearchComponent({
         return x;
     }, []);
     const handleFilterClick = () => setFilters((prev) => !prev);
-    const closeModal = () => setMobileModal(false);
     const handleMultiple = (type: string, value: string) => searchMultipleParam({
         type,
         value,
-        callback: closeModal,
         searchParams,
         router,
     })
     const handleSingular = (type: string, value: string) => searchSingularParam({
         type,
         value,
-        callback: closeModal,
         searchParams,
         router,
     })
@@ -46,6 +43,7 @@ export default function SearchComponent({
             handleMultiple={handleMultiple}
             handleSingular={handleSingular}
             setMobileModal={setMobileModal}
+            searchParams={searchParams}
         />
     );
 };

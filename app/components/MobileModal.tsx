@@ -10,7 +10,7 @@ export default function MobileModal({ children, open, close, className }: Readon
     className?: string,
 }>) {
     return (
-        <div className="sm:hidden">
+        <div className="md:hidden">
             {open && (
                 <div className={classNames(
                     "absolute inset-y-0 right-0 z-40",

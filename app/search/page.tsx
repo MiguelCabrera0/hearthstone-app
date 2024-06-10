@@ -5,6 +5,7 @@ import NoCards from "@/public/assets/no cards found@3x.png";
 import Link from "next/link";
 import CardNavigator from "../components/SearchComponents/CardNavigator";
 import { UrlSearchParams } from "../utilities/types";
+import SearchParamView from "../components/SearchComponents/SearchParamView";
 
 export default async function Search({
     searchParams,
@@ -20,9 +21,11 @@ export default async function Search({
                 <SearchComponent
                     searchParams={searchParams}
                 />
-                <h1 className="text-2xl ml-28 my-8">
-                    Results for: "{searchParams.textFilter}"
-                </h1>
+                <div className="hidden md:block">
+                    <SearchParamView
+                        searchParams={searchParams}
+                    />
+                </div>
                 <CardNavigator
                     page={page}
                     cards={cards}
@@ -34,9 +37,9 @@ export default async function Search({
         )
         : (
             <div>
-                <h1 className="text-2xl ml-28 my-8">
-                    No results for: "{searchParams.textFilter}"
-                </h1>
+                <SearchParamView
+                    searchParams={searchParams}
+                />
                 <div className="flex w-full justify-center flex-col items-center text-center">
                     <Image
                         src={NoCards}

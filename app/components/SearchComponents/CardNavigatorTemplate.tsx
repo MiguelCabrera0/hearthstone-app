@@ -1,5 +1,3 @@
-'use client';
-
 import CardComponent from "../CardComponent";
 import ArrowRight from "@/public/assets/Arrow right@3x.png";
 import ArrowLeft from "@/public/assets/Arrow left@3x.png";

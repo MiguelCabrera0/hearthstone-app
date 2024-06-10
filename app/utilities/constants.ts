@@ -21,6 +21,16 @@ import DemonHunter from "@/public/assets/demon hunter emblem@3x.png"
 import Warlock from "@/public/assets/warlock emblem@3x.png"
 import Warrior from "@/public/assets/warrior emblem@3x.png"
 
+export const searchParamAbbreviations: { [key: string]: string } = {
+    manaCost: 'Mana:',
+    attack: 'Atk:',
+    health: 'Hp:',
+    type: 'Card Type:',
+    minionType: 'Minion:',
+    rarity: 'Rarity:',
+    keyword: 'Key word:'
+};
+
 export const sortTypes = [
     { name: 'Mana Cost: low to high', slug: 'manaCost:asc' },
     { name: 'Mana Cost: high to low', slug: 'manaCost:desc' },
@@ -35,7 +45,6 @@ export const sortTypes = [
     { name: 'Name: low to high', slug: 'name:asc' },
     { name: 'Name: high to low', slug: 'name:desc' },
 ];
-
 
 export const classData = {
     "mage": {

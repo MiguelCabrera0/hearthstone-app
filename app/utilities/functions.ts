@@ -66,7 +66,8 @@ export const searchMultipleParam = ({
     } else {
         searchSingularParam({ type, value, callback, searchParams, router });
     }
-}
+};
+
 export function searchSingularParam({
     type,
     value,
@@ -75,11 +76,13 @@ export function searchSingularParam({
     router,
 }: SearchParams) {
     const newParams = { ...searchParams };
+    const params = new URLSearchParams();
     newParams[type] = String(value);
-    const x = Object
+    Object
         .entries(newParams)
-        .map(([key, val]) => `${key}=${String(val).replaceAll('\n', '')}`)
-        .join('&');
+        .forEach(([key, val]) => {
+            params.set(key, String(val));
+        });
     callback && callback();
-    router.replace(`search?${x}`, { scroll: false });
-}
+    router.replace("search?" + params, { scroll: false });
+};
