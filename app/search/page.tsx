@@ -1,16 +1,16 @@
 import SearchComponent from "../components/SearchComponents/SearchComponent";
-import CardComponent from "../components/CardComponent";
 import { getToken, searchCards } from "../utilities/functions";
 import Image from "next/image";
 import NoCards from "@/public/assets/no cards found@3x.png";
 import Link from "next/link";
 import CardNavigator from "../components/SearchComponents/CardNavigator";
+import { UrlSearchParams } from "../utilities/types";
 
 export default async function Search({
     searchParams,
-}: {
-    searchParams: { [key: string]: string | string[] | undefined }
-}) {
+}: Readonly<{
+    searchParams: UrlSearchParams;
+}>) {
     const token = await getToken();
     const { cards, page, pageCount, cardCount } = await searchCards(token, searchParams)
         ?? { cards: [], page: 0, pageCount: 0 };

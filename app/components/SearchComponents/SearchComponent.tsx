@@ -4,11 +4,12 @@ import { searchMultipleParam, searchSingularParam } from "../../utilities/functi
 import React, { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import SearchTemplateComponent from "./SearchTemplateComponent";
+import { UrlSearchParams } from "@/app/utilities/types";
 
 export default function SearchComponent({
     searchParams,
 }: Readonly<{
-    searchParams: { [key: string]: string | string[] | undefined }
+    searchParams: UrlSearchParams;
 }>) {
     const router = useRouter();
     const [mobileModal, setMobileModal] = useState(false);

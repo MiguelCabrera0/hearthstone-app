@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from "react";
-import { Card } from "../../utilities/types";
+import { Card, UrlSearchParams } from "../../utilities/types";
 import CardComponent from "../CardComponent";
 import ArrowRight from "@/public/assets/Arrow right@3x.png";
 import ArrowLeft from "@/public/assets/Arrow left@3x.png";
@@ -16,7 +16,7 @@ export default function CardNavigator({ cards, page, pageCount, cardCount, searc
     page: number;
     pageCount: number;
     cardCount: number;
-    searchParams: { [key: string]: string | string[] | undefined }
+    searchParams: UrlSearchParams;
 }>) {
     const router = useRouter();
     const [cardMobileIndex, setCardMobileIndex] = useState(0);

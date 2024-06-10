@@ -1,5 +1,5 @@
 import { cardTypes, client, rarities, secret, sets } from "./constants";
-import { Card, CardSearchResult, SearchParams } from "./types";
+import { Card, CardSearchResult, SearchParams, UrlSearchParams } from "./types";
 
 export const getToken = (async () => {
     const url = 'https://oauth.battle.net/oauth/token';
@@ -21,7 +21,7 @@ export function classNames(...classes: (string | null | undefined)[]) {
     return classes.filter(Boolean).join(' ')
 };
 
-export async function searchCards(accessToken: string, searchParams: { [key: string]: string | string[] | undefined }) {
+export async function searchCards(accessToken: string, searchParams: UrlSearchParams) {
     const pageSize = "8";
     const params = new URLSearchParams();
     params.set('pageSize', pageSize);

@@ -41,10 +41,15 @@ export type SelectOption = {
     image?: string,
 };
 
+export type UrlSearchParams = {
+    [key: string]: string | string[] | undefined
+}
+
 export type SearchParams = {
-    type: string,
-    value: string,
-    callback?: () => void,
-    searchParams: { [key: string]: string | string[] | undefined },
-    router: AppRouterInstance
+    type: string;
+    value: string;
+    callback?: () => void;
+    searchParams: UrlSearchParams;
+    router: AppRouterInstance;
 };
+
