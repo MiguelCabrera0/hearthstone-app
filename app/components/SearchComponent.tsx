@@ -1,6 +1,6 @@
 'use client';
 
-import { classNames } from "../utilities/functions";
+import { classNames, searchMultipleParam, searchSingularParam } from "../utilities/functions";
 import { cardTypes, keywords, minionTypes, rarities, sortTypes } from "../utilities/constants";
 import Image from "next/image";
 import BorderGoldenBox from "./BorderGoldenBox";
@@ -78,12 +78,8 @@ function Filters({
 }
 
 export default function SearchComponent({
-    page,
-    pages,
     searchParams,
 }: Readonly<{
-    page: number,
-    pages: number[],
     searchParams: { [key: string]: string | string[] | undefined }
 }>) {
     const router = useRouter();
@@ -96,27 +92,21 @@ export default function SearchComponent({
         return x;
     }, []);
     const handleFilterClick = () => setFilters((prev) => !prev);
-    const handleMultiple = (type: string, value: string) => {
-        if (searchParams[type]) {
-            const prevValues = String(searchParams[type]).split(',');
-            if (!prevValues.some((x) => x === value)) {
-                prevValues.push(value);
-                handleSingular(type, prevValues.join(','));
-            }
-        } else {
-            handleSingular(type, value);
-        }
-    }
-    const handleSingular = (type: string, value: number | string) => {
-        const newParams = { ...searchParams };
-        newParams[type] = String(value);
-        const x = Object
-            .entries(newParams)
-            .map(([key, val]) => `${key}=${String(val).replaceAll('\n', '')}`)
-            .join('&');
-        setMobileModal(false);
-        router.replace(`search?${x}`, { scroll: false });
-    }
+    const closeModal = () => setMobileModal(false);
+    const handleMultiple = (type: string, value: string) => searchMultipleParam({
+        type,
+        value,
+        callback: closeModal,
+        searchParams,
+        router,
+    })
+    const handleSingular = (type: string, value: string) => searchSingularParam({
+        type,
+        value,
+        callback: closeModal,
+        searchParams,
+        router,
+    })
     return (
         <div>
             <div className="flex justify-center">
@@ -147,7 +137,7 @@ export default function SearchComponent({
                                     id="sort"
                                     options={sortTypes}
                                     placeholder="Sort Type"
-                                    onChange={(slug) => handleSingular('sort', slug)}
+                                    onChange={(slug) => handleSingular('sort', String(slug))}
                                 />
                             </BorderGoldenBox>
                         </div>
@@ -193,7 +183,7 @@ export default function SearchComponent({
                             id="sort"
                             options={sortTypes}
                             placeholder="Sort Type"
-                            onChange={(slug) => handleSingular('sort', slug)}
+                            onChange={(slug) => handleSingular('sort', String(slug))}
                         />
                     </BorderGoldenBox>
                     <button onClick={handleFilterClick} className="bg-transparent">

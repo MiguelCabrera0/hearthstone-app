@@ -4,6 +4,7 @@ import { getToken, searchCards } from "../utilities/functions";
 import Image from "next/image";
 import NoCards from "@/public/assets/no cards found@3x.png";
 import Link from "next/link";
+import CardNavigator from "../components/CardNavigator";
 
 export default async function Search({
     searchParams,
@@ -13,44 +14,22 @@ export default async function Search({
     const token = await getToken();
     const { cards, page, pageCount, cardCount } = await searchCards(token, searchParams)
         ?? { cards: [], page: 0, pageCount: 0 };
-    let start = page - 4;
-    let final = 1;
-    if (page <= pageCount) {
-        if (start < 1) {
-            final = page - start + 7;
-            start = 1;
-        } else {
-            final = page + 6;
-        }
-        if (final > pageCount) {
-            final = pageCount + 1;
-        }
-    } else {
-        start = pageCount;
-        final = pageCount + 2;
-    }
-    const pages = new Array(final - start)
-        .fill(null)
-        .map((_, index) => start + index);
     return cardCount > 0
         ? (
             <div>
                 <SearchComponent
-                    page={page}
-                    pages={pages}
                     searchParams={searchParams}
                 />
                 <h1 className="text-2xl ml-28 my-8">
                     Results for: "{searchParams.textFilter}"
                 </h1>
-                {/* <div className="grid grid-cols-5 w-full mb-8">
-                    {cards.map((card) => (
-                        <CardComponent
-                            key={card.id}
-                            card={card}
-                        />
-                    ))}
-                </div> */}
+                <CardNavigator
+                    page={page}
+                    cards={cards}
+                    pageCount={pageCount}
+                    cardCount={cardCount}
+                    searchParams={searchParams}
+                />
             </div>
         )
         : (

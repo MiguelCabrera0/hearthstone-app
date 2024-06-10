@@ -1,3 +1,5 @@
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+
 export type Card = {
     id: number;
     collectible: number;
@@ -39,3 +41,10 @@ export type SelectOption = {
     image?: string,
 };
 
+export type SearchParams = {
+    type: string,
+    value: string,
+    callback?: () => void,
+    searchParams: { [key: string]: string | string[] | undefined },
+    router: AppRouterInstance
+};
