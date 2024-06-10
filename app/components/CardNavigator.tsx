@@ -201,7 +201,17 @@ export default function CardNavigator({ cards, page, pageCount, cardCount, searc
                     />
                 </button>
             </div>
-            <div className="flex md:hidden mb-8 w-full justify-center items-center space-x-5 text-xs mt-36 bottom-0">
+            <div className="flex md:hidden mb-8 w-full justify-center items-center space-x-5 text-xs mt-36 bottom-0 max-h-5/6 flex-wrap">
+                {cardArray[0] !== 1 && (
+                    <>
+                        <button onClick={() => handleMobileDirect(1)}>
+                            1
+                        </button>
+                        <span>
+                            ...
+                        </span>
+                    </>
+                )}
                 {cardArray.map((cd) => cd === curCardNumber
                     ? (
                         <button className="hover:bg-blue-700" onClick={() => handleMobileDirect(cd)}>
