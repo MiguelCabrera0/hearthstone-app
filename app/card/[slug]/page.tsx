@@ -45,7 +45,7 @@ export default async function CardView({
                 <span><strong>Type:</strong> {card.cardType}</span>
                 <span><strong>Rarity:</strong> {card.rarity}</span>
                 <span><strong>Set:</strong> {card.setName}</span>
-                <span><strong>Effect:</strong> {card.text}</span>
+                <span><strong>Effect:</strong><div dangerouslySetInnerHTML={{ __html: card.text }} /></span>
             </div>
         </div>
     )
