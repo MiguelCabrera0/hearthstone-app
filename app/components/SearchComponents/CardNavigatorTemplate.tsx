@@ -83,14 +83,14 @@ export default function CardNavigatorTemplate({
                 )}
                 {pages.map((pag) => pag === page
                     ? (
-                        <button onClick={() => handleDirectNavigate(String(pag))}>
+                        <button key={`page-button-${pag}`} onClick={() => handleDirectNavigate(String(pag))}>
                             <BorderGoldenBox>
                                 {pag}
                             </BorderGoldenBox>
                         </button>
                     )
                     : (
-                        <button onClick={() => handleDirectNavigate(String(pag))}>
+                        <button key={`page-button-${pag}`}  onClick={() => handleDirectNavigate(String(pag))}>
                             {pag}
                         </button>
                     )
@@ -142,14 +142,14 @@ export default function CardNavigatorTemplate({
                 )}
                 {cardArray.map((cd) => cd === curCardNumber
                     ? (
-                        <button className="hover:bg-blue-700" onClick={() => handleMobileDirect(cd)}>
+                        <button key={`card-button-${cd}`}  className="hover:bg-blue-700" onClick={() => handleMobileDirect(cd)}>
                             <BorderGoldenBox>
                                 {cd}
                             </BorderGoldenBox>
                         </button>
                     )
                     : (
-                        <button className="hover:bg-blue-700" onClick={() => handleMobileDirect(cd)}>
+                        <button key={`card-button-${cd}`}  className="hover:bg-blue-700" onClick={() => handleMobileDirect(cd)}>
                             {cd}
                         </button>
                     )

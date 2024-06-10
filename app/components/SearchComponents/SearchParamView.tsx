@@ -85,13 +85,13 @@ export default function SearchParamView({
             </button>
             <div className="block md:flex md:flex-wrap md:ml-24 my-8 space-x-2 space-y-2">
                 <h1 className="text-2xl">
-                    Results for: "{searchParams.textFilter}"
+                    Results for: &quot;{searchParams.textFilter}&quot;
                 </h1>
                 {textFilter && (<button onClick={deleteSearch}>
                     <XCircleIcon width={20} color="#fcd52d" />
                 </button>)}
                 {newSearchParams.map((item) => (
-                    <Chip onDelete={() => onDeleteParam(item)}>
+                    <Chip key={`chip-filter-${item.slug}-${item.name}`} onDelete={() => onDeleteParam(item)}>
                         {item.name}
                     </Chip>
                 ))}

@@ -45,7 +45,7 @@ export default function SelectComponent({ id, options, placeholder, value, onCha
                 </span>
                 <div className="flex flex-col invisible h-0 overflow-auto">
                     {options.map(item => (
-                        <span>{item.name}</span>
+                        <span key={item.slug}>{item.name}</span>
                     ))}
                     <div className="w-40" />
                 </div>
