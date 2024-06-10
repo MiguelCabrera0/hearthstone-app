@@ -11,7 +11,7 @@ export default function CardComponent({ card }:
     return (
         <div
             key={card.id}
-            className="flex items-center justify-center flex-col"
+            className="flex hover:drop-shadow-class-shadow transition-all ease-in-out delay-50 items-center justify-center flex-col text-black hover:text-golden [&>div]:hover:bg-[#3c2203]"
             onClick={onClick}
         >
             <button onClick={onClick}>
@@ -22,7 +22,7 @@ export default function CardComponent({ card }:
                     height={216}
                 />
             </button>
-            <div className="Rectangle-5 text-black flex text-center text-xs flex-col relative">
+            <div className="Rectangle-5 flex text-center text-xs flex-col relative">
                 <button className="Ellipse-1">
                     <svg fill="#7a5b35" version="1.1" viewBox="0 0 378.94 378.94">
                         <g>

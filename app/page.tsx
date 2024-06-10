@@ -27,7 +27,8 @@ export default function Home() {
           "Rectangle-3",
           "flex align-center align-items-center",
           "space-x-4",
-          "md:w-5/6"
+          "md:w-5/6",
+          "hover:drop-shadow-class-shadow transition-all ease-in-out delay-50"
         )}
         onSubmit={handleSubmit}
       >
@@ -69,7 +70,7 @@ export default function Home() {
               alt={cl.name}
               height={84}
               width={84}
-              className="hover:drop-shadow-class-shadow md:h-[164px] md:w-[164px]"
+              className="hover:drop-shadow-class-shadow md:h-[164px] md:w-[164px] transition-all ease-in-out delay-50"
             />
             {cl.name}
           </Link>
